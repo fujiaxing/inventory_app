@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'screens/workbench_content.dart';
 import 'screens/task_center_content.dart';
 import 'screens/business_function_screen.dart';
+import 'screens/profile_content.dart';
+import 'screens/inbound_scan_screen.dart';
 
 void main() {
   runApp(const InventoryApp());
@@ -47,7 +49,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   final List<Widget> _pages = [
     const WorkbenchContent(),
     const TaskCenterContent(),
-    const Center(child: Text('个人中心开发中...')),
+    const ProfileContent(),
   ];
 
   final List<String> _titles = ['工作台', '任务中心', '个人中心'];
@@ -58,15 +60,22 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
       appBar: _buildAppBar(),
       body: _pages[_currentIndex],
       bottomNavigationBar: _buildBottomNav(),
-      floatingActionButton: _currentIndex == 0
+      floatingActionButton: _currentIndex != 2
           ? FloatingActionButton(
-              onPressed: () => _navigateTo(context, '扫码识别', Icons.qr_code_scanner),
+              onPressed: () => _navigateToScan(context),
               backgroundColor: const Color(0xFF005BBF),
               foregroundColor: Colors.white,
               shape: const CircleBorder(),
               child: const Icon(Icons.qr_code_scanner, size: 28),
             )
           : null,
+    );
+  }
+
+  void _navigateToScan(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const InboundScanScreen()),
     );
   }
 
@@ -94,10 +103,16 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
       ),
       centerTitle: false,
       actions: [
-        IconButton(
-          icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF1A73E8)),
-          onPressed: () => _navigateTo(context, '扫码识别', Icons.qr_code_scanner),
-        ),
+        if (_currentIndex != 2)
+          IconButton(
+            icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF1A73E8)),
+            onPressed: () => _navigateToScan(context),
+          )
+        else
+          IconButton(
+            icon: const Icon(Icons.notifications_none, color: Color(0xFF1A73E8)),
+            onPressed: () {},
+          ),
         const SizedBox(width: 8),
       ],
       bottom: PreferredSize(
