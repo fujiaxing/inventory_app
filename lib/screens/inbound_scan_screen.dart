@@ -366,7 +366,7 @@ class InboundScanScreen extends StatelessWidget {
               icon: const Icon(Icons.edit_square, size: 18),
               label: const Text('手动输入'),
               style: OutlinedButton.styleFrom(
-                height: 48,
+                minimumSize: const Size.fromHeight(48),
                 foregroundColor: const Color(0xFF191C23),
                 side: const BorderSide(color: Color(0xFF727785)),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -381,7 +381,7 @@ class InboundScanScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF005BBF),
                 foregroundColor: Colors.white,
-                height: 48,
+                minimumSize: const Size.fromHeight(48),
                 elevation: 4,
                 shadowColor: const Color(0xFF005BBF).withOpacity(0.3),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
