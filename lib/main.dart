@@ -4,6 +4,7 @@ import 'screens/task_center_content.dart';
 import 'screens/business_function_screen.dart';
 import 'screens/profile_content.dart';
 import 'screens/inbound_scan_screen.dart';
+import 'screens/login_screen.dart';
 
 void main() {
   runApp(const InventoryApp());
@@ -31,7 +32,11 @@ class InventoryApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color(0xFFF9F9FF),
       ),
-      home: const MainHomeScreen(),
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const MainHomeScreen(),
+      },
     );
   }
 }
